@@ -1,6 +1,7 @@
 package edu.postech.csed332.homework2;
 
-import java.util.List;
+import java.util.*;
+import org.json.*;
 
 /**
  * The Collection class represents a single collection, which contains
@@ -20,6 +21,8 @@ public final class Collection extends Element {
     public Collection(String name) {
         this.name = name;
         // TODO write more code if necessary
+        this.elements = new ArrayList<Element>();
+        this.setParentCollection(null);
     }
 
     /**
@@ -29,6 +32,25 @@ public final class Collection extends Element {
      */
     public static Collection restoreCollection(String stringRepr) {
         // TODO implement this
+        try{
+            JSONObject json = new JSONObject(stringRepr);
+            String colName = json.getString("name");
+            Collection rst = new Collection(colName);
+
+            JSONArray jsonBooks = json.getJSONArray("books");
+            for(int i = 0; i < jsonBooks.length(); i++){
+                Book newBook = new Book(jsonBooks.getJSONObject(i).toString());
+                rst.addElement(newBook);
+            }
+            
+            JSONArray jsonSubcollections = json.getJSONArray("subcollections");
+            for(int i = 0; i < jsonSubcollections.length(); i++){
+                JSONObject jsonSubcollection = jsonSubcollections.getJSONObject(i);
+                Collection newCollection = restoreCollection(jsonSubcollection.toString());
+                rst.addElement(newCollection);
+            }
+            return rst;
+        } catch(JSONException e){};
         return null;
     }
 
@@ -41,6 +63,31 @@ public final class Collection extends Element {
      */
     public String getStringRepresentation() {
         // TODO implement this
+        try{
+            JSONStringer rst = new JSONStringer();
+            rst.object();
+            rst.key("name").value(this.name);
+            rst.key("subcollections");
+            rst.array();
+            for(Element cur: elements){
+                if(cur instanceof Collection){
+                    JSONObject elementObject = new JSONObject(((Collection)cur).getStringRepresentation());
+                    rst.value(elementObject);
+                }
+            }
+            rst.endArray();
+            rst.key("books");
+            rst.array();
+            for(Element cur: elements){
+                if(cur instanceof Book){
+                    JSONObject elementObject = new JSONObject(((Book)cur).getStringRepresentation());
+                    rst.value(elementObject);
+                }
+            }
+            rst.endArray();
+            rst.endObject();
+            return rst.toString();
+        }catch(JSONException e){}
         return null;
     }
 
@@ -54,7 +101,8 @@ public final class Collection extends Element {
      */
     public boolean addElement(Element element) {
         // TODO implement this
-        return false;
+        element.setParentCollection(this);
+        return elements.add(element);
     }
 
     /**
@@ -67,7 +115,8 @@ public final class Collection extends Element {
      */
     public boolean deleteElement(Element element) {
         // TODO implement this
-        return false;
+        element.setParentCollection(null);
+        return elements.remove(element);
     }
 
     /**

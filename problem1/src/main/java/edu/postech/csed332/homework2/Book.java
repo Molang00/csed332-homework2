@@ -1,6 +1,9 @@
 package edu.postech.csed332.homework2;
 
-import java.util.List;
+import java.util.*;
+
+// import jdk.nashorn.internal.parser.JSONParser;
+import org.json.*;
 
 /**
  * A book contains the title and the author(s), each of which is
@@ -22,6 +25,7 @@ public final class Book extends Element {
         this.title = title;
         this.authors = authors;
         // TODO write more code if necessary
+        this.setParentCollection(null);
     }
 
     /**
@@ -32,6 +36,16 @@ public final class Book extends Element {
      */
     public Book(String stringRepr) {
         // TODO implement this
+        try{
+            JSONObject json = new JSONObject(stringRepr);
+            this.title = json.getString("title");
+            JSONArray jsonAuthors = json.getJSONArray("authors");
+            this.authors = new ArrayList<String>();
+            for(int i = 0; i < jsonAuthors.length(); i++){
+                this.authors.add(jsonAuthors.getString(i));
+            }
+            this.setParentCollection(null);
+        } catch(JSONException e){}
     }
 
     /**
@@ -42,6 +56,14 @@ public final class Book extends Element {
      */
     public String getStringRepresentation() {
         // TODO implement this
+        try{
+            JSONStringer rst = new JSONStringer();
+            rst.object();
+            rst.key("title").value(this.title);
+            rst.key("authors").value(this.authors);
+            rst.endObject();
+            return rst.toString();
+        } catch(JSONException e){}
         return null;
     }
 
@@ -59,7 +81,13 @@ public final class Book extends Element {
      */
     public List<Collection> getContainingCollections() {
         // TODO implement this
-        return null;
+        List<Collection> rst = new ArrayList<Collection>();
+        Collection parent = this.getParentCollection();
+        while(parent != null){
+            rst.add(parent);
+            parent = parent.getParentCollection();
+        }
+        return rst;
     }
 
     /**
