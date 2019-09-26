@@ -1,7 +1,10 @@
 package edu.postech.csed332.homework2;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
+import org.json.*;
+
+import java.io.*;
 
 /**
  * A container class for all collections (that eventually contain all
@@ -15,6 +18,7 @@ public final class Library {
      */
     public Library() {
         // TODO implement this
+        collections = null;
     }
 
     /**
@@ -24,6 +28,7 @@ public final class Library {
      */
     public Library(String fileName) {
         // TODO implement this
+
     }
 
     /**
@@ -33,6 +38,22 @@ public final class Library {
      */
     public void saveLibraryToFile(String fileName) {
         // TODO implement this
+        try{
+            File writeFile = new File(fileName);
+            FileWriter fw = new FileWriter(writeFile);
+            JSONStringer rst = new JSONStringer();
+            rst.object();
+            rst.key("collections");
+            rst.array();
+            for(Collection collection: collections){
+                JSONObject collectionObject = new JSONObject(collection.getStringRepresentation());
+                rst.value(collectionObject);
+            }
+            rst.endArray();
+            rst.endObject();
+            
+            fw.write(rst.toString());
+        }catch(IOException e){}catch(JSONException e){}
     }
     
     /**
