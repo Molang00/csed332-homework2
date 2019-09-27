@@ -9,6 +9,7 @@ public class ExpTest {
     @Test
     void testParserOK() {
         Exp exp = ExpParser.parse("p1 || p2 && ! p3 || true");
+        System.out.println("exp: "+exp);;
         assertEquals(exp.toString(), "((p1 || (p2 && (! p3))) || true)");
     }
 
