@@ -102,8 +102,7 @@ public final class Library {
         for(Collection cur: collections){
             rst.addAll(cur.getTargetBooks(collection, false));
         }
-        if(rst.size() > 0) return rst;
-        else return null;
+        return rst;
     }
 
     /**
@@ -122,8 +121,7 @@ public final class Library {
         for(Collection cur: collections){
             rst.addAll(cur.getBooksByAuthor(author));
         }
-        if(rst.size() > 0) return rst;
-        else return null;
+        return rst;
     }
 
     /**

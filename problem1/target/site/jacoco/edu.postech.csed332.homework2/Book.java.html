@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Book.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">homework2</a> &gt; <a href="index.source.html" class="el_package">edu.postech.csed332.homework2</a> &gt; <span class="el_source">Book.java</span></div><h1>Book.java</h1><pre class="source lang-java linenums">package edu.postech.csed332.homework2;
 
-import java.util.List;
+import java.util.*;
+
+// import jdk.nashorn.internal.parser.JSONParser;
+import org.json.*;
 
 /**
  * A book contains the title and the author(s), each of which is
@@ -18,11 +21,12 @@ public final class Book extends Element {
      * @param title   the title of the book
      * @param authors the author(s) of the book
      */
-<span class="fc" id="L21">    public Book(String title, List&lt;String&gt; authors) {</span>
-<span class="fc" id="L22">        this.title = title;</span>
-<span class="fc" id="L23">        this.authors = authors;</span>
+<span class="fc" id="L24">    public Book(String title, List&lt;String&gt; authors) {</span>
+<span class="fc" id="L25">        this.title = title;</span>
+<span class="fc" id="L26">        this.authors = authors;</span>
         // TODO write more code if necessary
-<span class="fc" id="L25">    }</span>
+<span class="fc" id="L28">        this.setParentCollection(null);</span>
+<span class="fc" id="L29">    }</span>
 
     /**
      * Builds a book from the string representation in JSON, which
@@ -30,9 +34,19 @@ public final class Book extends Element {
      *
      * @param stringRepr the JSON string representation
      */
-<span class="nc" id="L33">    public Book(String stringRepr) {</span>
+<span class="fc" id="L37">    public Book(String stringRepr) {</span>
         // TODO implement this
-<span class="nc" id="L35">    }</span>
+        try{
+<span class="fc" id="L40">            JSONObject json = new JSONObject(stringRepr);</span>
+<span class="fc" id="L41">            this.title = json.getString(&quot;title&quot;);</span>
+<span class="fc" id="L42">            JSONArray jsonAuthors = json.getJSONArray(&quot;authors&quot;);</span>
+<span class="fc" id="L43">            this.authors = new ArrayList&lt;String&gt;();</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for(int i = 0; i &lt; jsonAuthors.length(); i++){</span>
+<span class="fc" id="L45">                this.authors.add(jsonAuthors.getString(i));</span>
+            }
+<span class="fc" id="L47">            this.setParentCollection(null);</span>
+<span class="pc" id="L48">        } catch(JSONException e){}</span>
+<span class="fc" id="L49">    }</span>
 
     /**
      * Returns the JSON string representation of this book. The string
@@ -42,7 +56,15 @@ public final class Book extends Element {
      */
     public String getStringRepresentation() {
         // TODO implement this
-<span class="nc" id="L45">        return null;</span>
+        try{
+<span class="fc" id="L60">            JSONStringer rst = new JSONStringer();</span>
+<span class="fc" id="L61">            rst.object();</span>
+<span class="fc" id="L62">            rst.key(&quot;title&quot;).value(this.title);</span>
+<span class="fc" id="L63">            rst.key(&quot;authors&quot;).value(this.authors);</span>
+<span class="fc" id="L64">            rst.endObject();</span>
+<span class="fc" id="L65">            return rst.toString();</span>
+<span class="nc" id="L66">        } catch(JSONException e){}</span>
+<span class="nc" id="L67">        return null;</span>
     }
 
     /**
@@ -59,7 +81,13 @@ public final class Book extends Element {
      */
     public List&lt;Collection&gt; getContainingCollections() {
         // TODO implement this
-<span class="nc" id="L62">        return null;</span>
+<span class="fc" id="L84">        List&lt;Collection&gt; rst = new ArrayList&lt;Collection&gt;();</span>
+<span class="fc" id="L85">        Collection parent = this.getParentCollection();</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        while(parent != null){</span>
+<span class="fc" id="L87">            rst.add(parent);</span>
+<span class="fc" id="L88">            parent = parent.getParentCollection();</span>
+        }
+<span class="fc" id="L90">        return rst;</span>
     }
 
     /**
@@ -68,7 +96,7 @@ public final class Book extends Element {
      * @return the title
      */
     public String getTitle() {
-<span class="fc" id="L71">        return title;</span>
+<span class="fc" id="L99">        return title;</span>
     }
 
     /**
@@ -77,7 +105,7 @@ public final class Book extends Element {
      * @return the author(s)
      */
     public List&lt;String&gt; getAuthors() {
-<span class="nc" id="L80">        return authors;</span>
+<span class="fc" id="L108">        return authors;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

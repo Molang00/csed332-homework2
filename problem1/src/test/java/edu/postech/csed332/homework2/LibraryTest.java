@@ -17,6 +17,12 @@ public class LibraryTest {
     }
 
     @Test
+    public void testfindBooksByAuthorNull() {
+        Library lib = new Library();
+        Assertions.assertNull(lib.findBooksByAuthor("Linus"));
+    }
+
+    @Test
     public void testMakeLibrarywithFile() {
         Library lib = new Library("json/LibraryTestRead.json");
         List<Collection> collections = lib.getCollections();
