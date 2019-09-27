@@ -1,0 +1,28 @@
+{
+    "collections": [
+        {
+            "name": "Software",
+            "subcollections": [
+                {
+                    "subcollections": [],
+                    "books": [
+                        {
+                            "title": "WebDevelopment",
+                            "authors": [
+                                "front",
+                                "back"
+                            ]
+                        }
+                    ],
+                    "name": "FrontEnd"
+                },
+                {
+                    "subcollections": [],
+                    "books": [],
+                    "name": "BackEnd"
+                }
+            ],
+            "books": []
+        }
+    ]
+}

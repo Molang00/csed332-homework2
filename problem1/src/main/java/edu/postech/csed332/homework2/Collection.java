@@ -119,6 +119,39 @@ public final class Collection extends Element {
         return elements.remove(element);
     }
 
+    public Set<Book> getTargetBooks(String collectionName, boolean isIn){
+        Set<Book> rst = new HashSet<Book>();
+        if(name.equals(collectionName)){
+            isIn = true;
+        }
+        for(Element element: elements){
+            if(element instanceof Collection){
+                rst.addAll(((Collection)element).getTargetBooks(collectionName, isIn));
+            }
+            else if(element instanceof Book){
+                if(isIn){
+                    rst.add((Book)element);
+                }
+            }
+        }
+        return rst;
+    }
+
+    public Set<Book> getBooksByAuthor(String authorName){
+        Set<Book> rst = new HashSet<Book>();
+        for(Element element: elements){
+            if(element instanceof Collection){
+                rst.addAll(((Collection)element).getBooksByAuthor(authorName));
+            }
+            else if(element instanceof Book){
+                if(((Book)element).getAuthors().contains(authorName)){
+                    rst.add((Book)element);
+                }
+            }
+        }
+        return rst;
+    }
+
     /**
      * Returns the name of the collection.
      *

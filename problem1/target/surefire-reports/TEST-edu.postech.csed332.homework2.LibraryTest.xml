@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.postech.csed332.homework2.LibraryTest" time="0.001" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="edu.postech.csed332.homework2.LibraryTest" time="0.005" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="KR"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.4\bin"/>
-    <property name="sun.java.command" value="C:\Users\molang\AppData\Local\Temp\surefire5639838907129587717\surefirebooter2356671219151289590.jar C:\Users\molang\AppData\Local\Temp\surefire5639838907129587717 2019-09-26T15-35-06_732-jvmRun1 surefire15545783865745126929tmp surefire_014190238612065468518tmp"/>
+    <property name="sun.java.command" value="C:\Users\molang\AppData\Local\Temp\surefire1245560510667859601\surefirebooter9152452927044350428.jar C:\Users\molang\AppData\Local\Temp\surefire1245560510667859601 2019-09-27T15-17-54_743-jvmRun1 surefire17516696364978058063tmp surefire_04619272826937542045tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="E:\POSTECH\Semesters\2019-2\CSED332\homework2\problem1\target\test-classes;E:\POSTECH\Semesters\2019-2\CSED332\homework2\problem1\target\classes;C:\Users\molang\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.5.2\junit-jupiter-api-5.5.2.jar;C:\Users\molang\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\molang\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\molang\.m2\repository\org\junit\platform\junit-platform-commons\1.5.2\junit-platform-commons-1.5.2.jar;C:\Users\molang\.m2\repository\org\json\json\20190722\json-20190722.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\molang\AppData\Local\Temp\surefire5639838907129587717\surefirebooter2356671219151289590.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\molang\AppData\Local\Temp\surefire1245560510667859601\surefirebooter9152452927044350428.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.4+10-LTS"/>
@@ -53,12 +53,16 @@
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-11.0.4\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Users\molang\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\molang\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs;E:\Programs\runtime\win64;E:\Programs\bin;C:\Program Files\Git\cmd;E:\Programs\apache-maven-3.6.2\bin;C:\Program Files\Java\jdk-11.0.4\bin;C:\Users\molang\AppData\Local\Microsoft\WindowsApps;C:\Modeltech_pe_edu_10.4a\win32pe_edu;C:\Users\molang\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\molang\AppData\Roaming\npm;E:\Programs\IntelliJ IDEA 2019.2.2\bin;C:\Program Files\Java\jdk-11.0.4\bin;E:\Programs\apache-maven-3.6.2\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-11.0.4\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;E:\Programs\runtime\win64;E:\Programs\bin;C:\Program Files\Git\cmd;E:\Programs\apache-maven-3.6.2\bin;C:\Program Files\Java\jdk-11.0.4\bin;C:\Users\molang\AppData\Local\Microsoft\WindowsApps;C:\Modeltech_pe_edu_10.4a\win32pe_edu;C:\Users\molang\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\molang\AppData\Roaming\npm;E:\Programs\IntelliJ IDEA 2019.2.2\bin;;C:\Program Files\Java\jdk-11.0.4\bin;E:\Programs\apache-maven-3.6.2\bin;;."/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.vm.version" value="11.0.4+10-LTS"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
+  <testcase name="edu.postech.csed332.homework2.LibraryTest.testMakeLibrarywithFile" classname="edu.postech.csed332.homework2.LibraryTest" time="0"/>
+  <testcase name="edu.postech.csed332.homework2.LibraryTest.testSaveLibraryToFile" classname="edu.postech.csed332.homework2.LibraryTest" time="0"/>
+  <testcase name="edu.postech.csed332.homework2.LibraryTest.testfindBooksByAuthor" classname="edu.postech.csed332.homework2.LibraryTest" time="0"/>
   <testcase name="edu.postech.csed332.homework2.LibraryTest.testfindBooksNull" classname="edu.postech.csed332.homework2.LibraryTest" time="0"/>
+  <testcase name="edu.postech.csed332.homework2.LibraryTest.testfindBooks" classname="edu.postech.csed332.homework2.LibraryTest" time="0"/>
 </testsuite>

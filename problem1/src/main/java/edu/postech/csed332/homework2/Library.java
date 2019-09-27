@@ -1,9 +1,7 @@
 package edu.postech.csed332.homework2;
 
 import java.util.*;
-
 import org.json.*;
-
 import java.io.*;
 
 /**
@@ -28,7 +26,30 @@ public final class Library {
      */
     public Library(String fileName) {
         // TODO implement this
+        try{
+            StringBuilder stringBuilder = new StringBuilder();
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            while((line = bufferedReader.readLine()) != null){
+                stringBuilder.append(line).append('\n');
+            }
+            bufferedReader.close();
+            String fileContent = stringBuilder.toString();
+            JSONObject jsonObject = new JSONObject(fileContent);
 
+            collections = new ArrayList<Collection>();
+            JSONArray jsonCollections = jsonObject.getJSONArray("collections");
+            for(int i = 0; i < jsonCollections.length(); i++){
+                Collection newCollection = Collection.restoreCollection(jsonCollections.get(i).toString());
+                collections.add(newCollection);
+            }
+        }catch(IOException e){
+            System.out.println("IO error");
+        }
+        catch(JSONException e){
+            System.out.println("json error");
+        }
     }
 
     /**
@@ -53,7 +74,8 @@ public final class Library {
             rst.endObject();
             
             fw.write(rst.toString());
-        }catch(IOException e){}catch(JSONException e){}
+            fw.close();
+        }catch(IOException | JSONException e){}
     }
     
     /**
@@ -75,7 +97,13 @@ public final class Library {
      */
     public Set<Book> findBooks(String collection) {
         // TODO implement this
-        return null;
+        Set<Book> rst = new HashSet<Book>();
+        if(collections == null) return null;
+        for(Collection cur: collections){
+            rst.addAll(cur.getTargetBooks(collection, false));
+        }
+        if(rst.size() > 0) return rst;
+        else return null;
     }
 
     /**
@@ -89,7 +117,13 @@ public final class Library {
      */
     public Set<Book> findBooksByAuthor(String author) {
         // TODO implement this
-        return null;
+        Set<Book> rst = new HashSet<Book>();
+        if(collections == null) return null;
+        for(Collection cur: collections){
+            rst.addAll(cur.getBooksByAuthor(author));
+        }
+        if(rst.size() > 0) return rst;
+        else return null;
     }
 
     /**

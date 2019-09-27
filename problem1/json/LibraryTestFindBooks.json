@@ -1,0 +1,37 @@
+{
+    "collections": [
+        {
+            "name": "Computer Science",
+            "subcollections": [
+                {
+                    "subcollections": [],
+                    "books": [
+                        {
+                            "title": "Linux Kernel",
+                            "authors": [
+                                "Linus",
+                                "Benedict",
+                                "Torvalds"
+                            ]
+                        }
+                    ],
+                    "name": "Operating Systems"
+                },
+                {
+                    "subcollections": [],
+                    "books": [
+                        {
+                            "title": "Software Design Methods",
+                            "authors": [
+                                "Agile",
+                                "Waterfall"
+                            ]
+                        }
+                    ],
+                    "name": "Software Engineering"
+                }
+            ],
+            "books": []
+        }
+    ]
+}
