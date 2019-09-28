@@ -1,7 +1,6 @@
 package edu.postech.csed332.homework2;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A Boolean variable, identified by positive integers
@@ -34,13 +33,15 @@ public class Variable implements Exp {
     @Override
     public Set<Integer> vars() {
         // TODO: implement this
-        return null;
+        Set<Integer> rst = Set.of(identifier);
+        return rst;
     }
 
     @Override
     public Boolean evaluate(Map<Integer, Boolean> assignment) {
         // TODO: implement this
-        return null;
+        Boolean rst = assignment.get(identifier);
+        return rst;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package edu.postech.csed332.homework2;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A Boolean constant, either true or false.
@@ -28,13 +27,13 @@ public class Constant implements Exp {
     @Override
     public Set<Integer> vars() {
         // TODO: implement this
-        return null;
+        return new HashSet<Integer>();
     }
 
     @Override
     public Boolean evaluate(Map<Integer, Boolean> assignment) {
         // TODO: implement this
-        return null;
+        return value;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package edu.postech.csed332.homework2;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,13 +30,21 @@ public class Conjunction implements Exp {
     @Override
     public Set<Integer> vars() {
         // TODO: implement this
-        return null;
+        Set<Integer> rst = new HashSet<Integer>();
+        for(Exp subexp: subexps){
+            rst.addAll(subexp.vars());
+        }
+        return rst;
     }
 
     @Override
     public Boolean evaluate(Map<Integer, Boolean> assignment) {
         // TODO: implement this
-        return null;
+        Boolean rst = false;
+        for(int i = 0; i < subexps.size(); i++){
+            rst = rst & (subexps.get(i).evaluate(assignment));
+        }
+        return rst;
     }
 
     @Override

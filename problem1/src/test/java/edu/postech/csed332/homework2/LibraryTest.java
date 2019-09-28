@@ -2,7 +2,6 @@ package edu.postech.csed332.homework2;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.Assert;
 
 import java.util.*;
 import org.json.*;

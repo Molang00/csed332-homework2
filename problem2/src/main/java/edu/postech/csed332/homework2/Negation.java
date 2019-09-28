@@ -1,7 +1,6 @@
 package edu.postech.csed332.homework2;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A Boolean expression whose top-level operator is ! (not).
@@ -30,13 +29,19 @@ public class Negation implements Exp {
     @Override
     public Set<Integer> vars() {
         // TODO: implement this
-        return null;
+        return subexp.vars();
     }
 
     @Override
     public Boolean evaluate(Map<Integer, Boolean> assignment) {
         // TODO: implement this
-        return null;
+        Set<Integer> value = subexp.vars();
+        Iterator<Integer> it = value.iterator();
+        Boolean rst = false;
+        while(it.hasNext()){
+            rst = !assignment.get(it.next());
+        }
+        return rst;
     }
 
     @Override

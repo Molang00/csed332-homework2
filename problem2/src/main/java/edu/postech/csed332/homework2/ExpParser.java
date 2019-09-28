@@ -29,16 +29,19 @@ public class ExpParser {
         return new BooleanExpBaseVisitor<Exp>() {
             @Override
             public Exp visitParenExp(BooleanExpParser.ParenExpContext ctx) {
+                System.out.println("visitParenExp: "+ctx+" "+ctx.sub);
                 return visit(ctx.sub);
             }
 
             @Override
             public Exp visitUnaryExp(BooleanExpParser.UnaryExpContext ctx) {
+                System.out.println("visitUnaryExp: "+ctx+" "+ctx.sub);
                 return new Negation(visit(ctx.sub));
             }
 
             @Override
             public Exp visitBinaryExp(BooleanExpParser.BinaryExpContext ctx) {
+                System.out.println("visitBinaryExp: "+ctx+" "+ctx.left+" "+ctx.right);
                 switch (ctx.op.getType()) {
                     case BooleanExpLexer.AND:
                         return new Conjunction(visit(ctx.left), visit(ctx.right));
@@ -51,11 +54,13 @@ public class ExpParser {
 
             @Override
             public Exp visitConstant(BooleanExpParser.ConstantContext ctx) {
+                System.out.println("visitConstant: "+ctx+" "+ctx.value);
                 return new Constant(Boolean.parseBoolean(ctx.value.getText()));
             }
 
             @Override
             public Exp visitVariable(BooleanExpParser.VariableContext ctx) {
+                System.out.println("visitVariable: "+ctx+" "+ctx.name);
                 return new Variable(Integer.parseUnsignedInt(ctx.name.getText().substring(1)));
             }
         }.visit(par.expression());
