@@ -40,7 +40,7 @@ public class Conjunction implements Exp {
     @Override
     public Boolean evaluate(Map<Integer, Boolean> assignment) {
         // TODO: implement this
-        Boolean rst = false;
+        Boolean rst = true;
         for(int i = 0; i < subexps.size(); i++){
             rst = rst & (subexps.get(i).evaluate(assignment));
         }

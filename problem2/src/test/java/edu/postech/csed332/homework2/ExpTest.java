@@ -10,14 +10,6 @@ public class ExpTest {
     @Test
     public void testParserOK() {
         Exp exp = ExpParser.parse("p1 || p2 && ! p3 || true");
-        System.out.println("exp: "+exp);;
-        System.out.println("hi");;
-        System.out.println("exp: "+exp);;
-        System.out.println((exp instanceof Conjunction));
-        System.out.println((exp instanceof Constant));
-        System.out.println((exp instanceof Disjunction));
-        System.out.println((exp instanceof Negation));
-        System.out.println((exp instanceof Variable));
         assertEquals(exp.toString(), "((p1 || (p2 && (! p3))) || true)");
     }
 
@@ -35,19 +27,53 @@ public class ExpTest {
         List<Integer> expectList = Arrays.asList(1, 2, 3);
 
         Collections.sort(varsList);
-        System.out.println(varsList);
-        System.out.println(expectList);
         assertEquals(expectList, varsList);
     }
 
     @Test
-    public void testEvaluateTrue() {
-        Exp exp = ExpParser.parse("p1 || p2 && ! p3 || true");
+    public void testEvaluateVariableTrue() {
+        Exp exp = ExpParser.parse("p1");
         Map<Integer, Boolean> assignment = new HashMap<Integer, Boolean>();
         assignment.put(1, true);
-        assignment.put(2, true);
-        assignment.put(3, true);
 
+        assertTrue(exp.evaluate(assignment));
+    }
+
+
+    @Test
+    public void testEvaluateConstantTrue() {
+        Exp exp = ExpParser.parse("true");
+        Map<Integer, Boolean> assignment = new HashMap<Integer, Boolean>();
+
+        assertTrue(exp.evaluate(assignment));
+    }
+
+
+    @Test
+    public void testEvaluateNegationTrue() {
+        Exp exp = ExpParser.parse("! p1");
+        Map<Integer, Boolean> assignment = new HashMap<Integer, Boolean>();
+        assignment.put(1, false);
+
+        assertTrue(exp.evaluate(assignment));
+    }
+
+    @Test
+    public void testEvaluateNegationFalse() {
+        Exp exp = ExpParser.parse("! p1");
+        Map<Integer, Boolean> assignment = new HashMap<Integer, Boolean>();
+        assignment.put(1, true);
+
+        assertFalse(exp.evaluate(assignment));
+    }
+
+    @Test
+    public void testEvaluateTrue() {
+        Exp exp = ExpParser.parse("p1 || p2 && ! p3");
+        Map<Integer, Boolean> assignment = new HashMap<Integer, Boolean>();
+        assignment.put(1, false);
+        assignment.put(2, true);
+        assignment.put(3, false);
         assertTrue(exp.evaluate(assignment));
     }
 
@@ -60,6 +86,12 @@ public class ExpTest {
         assignment.put(3, false);
 
         assertFalse(exp.evaluate(assignment));
+    }
+
+    @Test
+    public void testDisjunctionSimplify() {
+        Exp exp = ExpParser.parse("p1 || p2 && ! p3");
+        exp.simplify();
     }
 
     /*

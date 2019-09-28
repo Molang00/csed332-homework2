@@ -16,17 +16,17 @@ import org.antlr.v4.runtime.*;
      */
     public static Exp parse(String str) throws IllegalStateException {
 
-<span class="nc" id="L19">        BooleanExpLexer lex = new BooleanExpLexer(CharStreams.fromString(str));</span>
-<span class="nc" id="L20">        BooleanExpParser par = new BooleanExpParser(new CommonTokenStream(lex));</span>
+<span class="fc" id="L19">        BooleanExpLexer lex = new BooleanExpLexer(CharStreams.fromString(str));</span>
+<span class="fc" id="L20">        BooleanExpParser par = new BooleanExpParser(new CommonTokenStream(lex));</span>
 
-<span class="nc" id="L22">        par.addErrorListener(new BaseErrorListener() {</span>
+<span class="fc" id="L22">        par.addErrorListener(new BaseErrorListener() {</span>
             @Override
             public void syntaxError(Recognizer&lt;?, ?&gt; recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
-<span class="nc" id="L25">                throw new IllegalStateException(&quot;Failed to parse at line &quot; + line + &quot; (&quot; + msg + &quot;)&quot;, e);</span>
+<span class="fc" id="L25">                throw new IllegalStateException(&quot;Failed to parse at line &quot; + line + &quot; (&quot; + msg + &quot;)&quot;, e);</span>
             }
         });
 
-<span class="nc" id="L29">        return new BooleanExpBaseVisitor&lt;Exp&gt;() {</span>
+<span class="fc" id="L29">        return new BooleanExpBaseVisitor&lt;Exp&gt;() {</span>
             @Override
             public Exp visitParenExp(BooleanExpParser.ParenExpContext ctx) {
 <span class="nc" id="L32">                return visit(ctx.sub);</span>
@@ -34,16 +34,16 @@ import org.antlr.v4.runtime.*;
 
             @Override
             public Exp visitUnaryExp(BooleanExpParser.UnaryExpContext ctx) {
-<span class="nc" id="L37">                return new Negation(visit(ctx.sub));</span>
+<span class="fc" id="L37">                return new Negation(visit(ctx.sub));</span>
             }
 
             @Override
             public Exp visitBinaryExp(BooleanExpParser.BinaryExpContext ctx) {
-<span class="nc bnc" id="L42" title="All 3 branches missed.">                switch (ctx.op.getType()) {</span>
+<span class="pc bpc" id="L42" title="1 of 3 branches missed.">                switch (ctx.op.getType()) {</span>
                     case BooleanExpLexer.AND:
-<span class="nc" id="L44">                        return new Conjunction(visit(ctx.left), visit(ctx.right));</span>
+<span class="fc" id="L44">                        return new Conjunction(visit(ctx.left), visit(ctx.right));</span>
                     case BooleanExpLexer.OR:
-<span class="nc" id="L46">                        return new Disjunction(visit(ctx.left), visit(ctx.right));</span>
+<span class="fc" id="L46">                        return new Disjunction(visit(ctx.left), visit(ctx.right));</span>
                     default:
 <span class="nc" id="L48">                        throw new UnsupportedOperationException();</span>
                 }
@@ -51,14 +51,14 @@ import org.antlr.v4.runtime.*;
 
             @Override
             public Exp visitConstant(BooleanExpParser.ConstantContext ctx) {
-<span class="nc" id="L54">                return new Constant(Boolean.parseBoolean(ctx.value.getText()));</span>
+<span class="fc" id="L54">                return new Constant(Boolean.parseBoolean(ctx.value.getText()));</span>
             }
 
             @Override
             public Exp visitVariable(BooleanExpParser.VariableContext ctx) {
-<span class="nc" id="L59">                return new Variable(Integer.parseUnsignedInt(ctx.name.getText().substring(1)));</span>
+<span class="fc" id="L59">                return new Variable(Integer.parseUnsignedInt(ctx.name.getText().substring(1)));</span>
             }
-<span class="nc" id="L61">        }.visit(par.expression());</span>
+<span class="fc" id="L61">        }.visit(par.expression());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
